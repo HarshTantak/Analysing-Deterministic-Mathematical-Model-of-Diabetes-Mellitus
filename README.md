@@ -1,19 +1,103 @@
-# Analyzing Deterministic Mathematical Model of Diabetes Mellitus
-This repository contains the research project conducted by Group 6 for the M.Sc. Statistics and Data Science program at SVKM’s NMIMS, under the guidance of Dr. Debasmita Mukherjee. The project focuses on developing a deterministic mathematical model to analyze Type 2 Diabetes Mellitus (T2DM), examining how various physiological and demographic factors interact to impact disease progression.
+# 🔬 Analyzing Deterministic Mathematical Model of Diabetes Mellitus
 
-## Project Overview
-Type 2 Diabetes Mellitus is a chronic condition characterized by elevated blood sugar levels, primarily due to insulin resistance or insufficiency. This study models interactions between key variables, such as glucose, insulin, cholesterol levels, and BMI, to provide insights into T2DM dynamics. The approach integrates mathematical modeling, data visualization, and regression analysis to explore the relationships between these factors and to identify the main contributors to diabetes progression.
 
-## Methodology
-Mathematical Modeling: Utilizing Ordinary Differential Equations (ODEs), we modeled the dynamics of glucose, insulin, BMI, and cholesterol levels in the context of T2DM.
-Data Visualization: We employed box plots, scatter plots, and radar plots to visualize data trends and relationships across different diabetes classes (non-diabetic, prediabetic, diabetic).
-Regression Analysis: Linear regression and multinomial logistic regression helped identify the most influential features affecting diabetes classification.
-## Key Findings
-Significant Predictors: HbA1c, BMI, and VLDL levels emerged as strong predictors of diabetes classification.
-Age & Gender Trends: The likelihood of diabetes increased with age, with significant demographic differences across classes.
-Model Validation: The model achieved high accuracy in classification, particularly for diabetic cases.
-## Tools and Libraries
-Python (SciPy, NumPy, Pandas, Matplotlib, Seaborn)
-Statistical and machine learning techniques for data analysis and modeling
-## Future Scope
-Future work could involve refining the dataset and exploring additional clinical parameters to improve model accuracy and stability. Enhanced cross-validation and testing with diverse datasets are also recommended.
+## 🧠 Project Overview
+
+This research project aims to model and analyze **Type 2 Diabetes Mellitus (T2DM)** using a **deterministic system of ordinary differential equations (ODEs)**, statistical learning, and health analytics. It explores how glucose, insulin, cholesterol (HDL/LDL), and BMI influence diabetes progression and diagnosis.
+
+---
+
+## 🔍 Objectives
+
+- Develop a mathematical model simulating the physiological interaction of diabetes-related metrics  
+- Apply linear and multinomial logistic regression to evaluate predictive relationships  
+- Use statistical visualization to uncover demographic and health patterns across diabetic states  
+
+---
+
+## 🛠 Methodology
+
+- **ODE-Based Mathematical Modeling**:
+  Models glucose, insulin, dietary intake, BMI, HDL, and LDL dynamics  
+<pre> ``` dG(t)/dt = k - (k₁ - k₃)·G(t) dI(t)/dt = k₄·G(t) - k₂·I(t) dB(t)/dt = k₆·D(t) - k₇·B(t) dH(t)/dt = -k₉·D(t) - k₁₀·H(t) dL(t)/dt = -k₁₁·D(t) + k₁₂·B(t) - k₁₃·L(t) dD(t)/dt = -k₁₅·I(t) - k₁₆·D(t) ``` </pre>
+
+- **Parameter Estimation**:
+  - Optimized using `scipy.optimize.minimize`
+  - Minimized Sum of Squared Errors (SSE)
+- **Statistical Modeling**:
+  - Multinomial logistic regression to predict class (`N`, `P`, `Y`)
+  - Linear regression to quantify factor impacts
+- **Model Validation**:
+  - MSE, R² evaluation
+  - Stability analysis using Jacobian matrix eigenvalues
+
+---
+
+## 📊 Key Visualizations & Insights
+
+### 📦 Box & Violin Plot: Age Distribution vs Diabetes Class
+- **Diabetic (Y)** group had **higher median age** with broader distribution
+- Violin plot showed **dense clustering** around 55–65 for diabetics
+
+### 🧬 Scatter Plot: HDL vs LDL with Cholesterol
+- High **LDL** correlated with **increased total cholesterol**
+- Low **HDL** with high LDL = higher cardiovascular and diabetic risk
+
+### 📈 Age vs HbA1c
+- Positive correlation between **age** and **HbA1c**
+- Suggests older individuals are more likely to have elevated blood sugar levels
+
+### 📉 Radar Plot: Health Profiles by Class (Age 30–50)
+- Diabetics show **higher average HbA1c, Chol, LDL**
+- Non-diabetics show **better lipid profile**
+
+### 🧪 Observed vs Simulated Dynamics
+- Simulations closely track observed data for **Glucose, Insulin, BMI, LDL, HDL**
+- Confirms model robustness in predicting real-world behavior
+
+---
+
+## 📋 Key Findings
+
+- **Top Predictive Features**:  
+  - HbA1c, BMI, VLDL, TG → Strong diabetes indicators  
+  - HDL → Protective factor  
+- **Regression Accuracy**:  
+  - 90.5% model accuracy  
+  - High precision & recall for Class Y (Diabetic)  
+- **Coefficients**:  
+  - AGE & LDL (positive influence)  
+  - BMI, HbA1c (negative but strong predictors)
+
+---
+
+## 📈 Classification Report (Excerpt)
+
+| Class | Precision | Recall | F1-Score |
+|-------|-----------|--------|----------|
+| N     | 0.79      | 0.73   | 0.76     |
+| P     | 0.29      | 0.10   | 0.15     |
+| Y     | 0.93      | 0.98   | 0.96     |
+
+---
+
+## 📌 Summary
+
+- Deterministic modeling provides a realistic simulation of diabetes progression
+- **HbA1c and BMI** are consistently the most influential features
+- Results support using personalized models to guide **preventive interventions**
+
+---
+
+## 🔮 Future Scope
+
+- Collect more refined real-world clinical datasets
+- Introduce stochasticity or uncertainty modeling in parameter estimation
+- Improve model generalizability using ensemble approaches and cross-validation
+
+---
+
+## 💻 Tools Used
+
+- **Python**: SciPy, NumPy, Pandas, Seaborn, Matplotlib, StatsModels
+- **Visualization**: Radar plots, 3D scatter, violin/box plots, regression overlays
